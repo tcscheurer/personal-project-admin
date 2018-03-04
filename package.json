@@ -1,0 +1,30 @@
+{
+  "name": "personalproject",
+  "version": "1.0.0",
+  "description": "personal-fullstack-project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "node index.js",
+    "client": "cd client && npm run start",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "author": "Trevor Scheurer",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.2",
+    "concurrently": "^3.5.1",
+    "cors": "^2.8.4",
+    "dotenv": "^5.0.0",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "johnny-five": "^0.14.1",
+    "lodash": "^4.17.5",
+    "massive": "^4.6.6",
+    "passport": "^0.4.0",
+    "passport-auth0": "^0.6.1",
+    "socket.io": "^2.0.4",
+    "twilio": "^3.11.3"
+  }
+}

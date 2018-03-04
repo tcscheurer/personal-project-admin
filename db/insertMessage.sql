@@ -1,0 +1,1 @@
+INSERT INTO messages(type,managerauthid,employeephone,body) VALUES ($1, $2, $3, $4);

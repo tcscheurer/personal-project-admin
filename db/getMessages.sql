@@ -1,0 +1,1 @@
+SELECT * FROM messages WHERE employeephone = $1 AND managerauthid = $2;

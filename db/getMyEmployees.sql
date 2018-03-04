@@ -1,0 +1,1 @@
+SELECT * FROM employees WHERE managerauthid = $1;

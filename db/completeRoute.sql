@@ -1,0 +1,1 @@
+UPDATE routes SET status = 'complete' WHERE managerauthid = $1 AND employeephone = $2 AND destLat = $3 AND destLon = $4;

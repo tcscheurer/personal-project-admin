@@ -1,0 +1,1 @@
+UPDATE employees SET latitude = $1, longitude = $2 WHERE phone = $3;

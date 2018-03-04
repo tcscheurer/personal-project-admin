@@ -1,0 +1,1 @@
+INSERT INTO employees(phone,name,managerauthid,latitude,longitude) VALUES ($1, $2, $3, $4, $5);
