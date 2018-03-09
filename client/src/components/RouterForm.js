@@ -23,7 +23,8 @@ class RouterForm extends React.Component{
         this.state = {
             destinationLat: '',
             destinationLon: '' ,
-            endpoint: 'http://localhost:5000'
+            endpoint: 'http://localhost:5000',
+            description: ''
         }
     }
 
@@ -38,16 +39,23 @@ class RouterForm extends React.Component{
          destinationLon: e.target.value
        })
      }
+     handleDescription = (e) => {
+         this.setState({
+             description: e.target.value
+         })
+     }
 
      employeeRoutingHandler = ()=>{
          console.log(this.state)
          console.log(this.props)
+         
          const body = {
              employeephone: this.props.employeePhone,
              destlat: this.state.destinationLat,
              destlon: this.state.destinationLon,
              startinglat: this.props.startingLat,
-             startinglon: this.props.startingLon
+             startinglon: this.props.startingLon,
+             description: this.state.description
          }
          console.log(body)
          axios.post('/api/routes',body).then(response=>{
@@ -70,8 +78,7 @@ class RouterForm extends React.Component{
             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
             errorText="Latitude to route employee"
             errorStyle={styles.errorStyle}
-            onChange={(e)=>this.handleDestinationLat(e)}
-            
+            onChange={(e)=>this.handleDestinationLat(e)}            
             /><br/>
             <TextField
             style={{zIndex: this.props.z}}
@@ -81,6 +88,16 @@ class RouterForm extends React.Component{
             errorText="Longitude to route employee"
             errorStyle={styles.errorStyle}
             onChange={(e)=>this.handleDestinationLon(e)}
+            /><br/>
+            <TextField
+            style={{zIndex: this.props.z}}
+            floatingLabelText="Description"
+            floatingLabelStyle={styles.floatingLabelStyle}
+            floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+            errorText="Breif information for your employee"
+            errorStyle={styles.errorStyle}
+            multiLine={true}
+            onChange={(e)=>this.handleDescription(e)}
             /><br/>
             <FlatButton style={{zIndex: this.props.z}} onClick={()=>{this.employeeRoutingHandler()}} label={`Route ${this.props.name}`} fullWidth={false} />
             </div>

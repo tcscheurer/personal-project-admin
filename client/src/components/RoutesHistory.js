@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import Paper from 'material-ui/Paper'
+import io from 'socket.io-client';
 
 const style = {
     height: 'auto',
@@ -17,14 +18,15 @@ class RoutesHistory extends React.Component{
         this.state = {
             employeephone: props.employeephone,
             returned: false,
-            returnedArr: []
+            returnedArr: [],
+            endpoint: 'http://localhost:5000'
         }
     }
 
 
     componentDidMount(){
         axios.get(`/api/routes/${this.state.employeephone}`).then(response=>{
-            
+            console.log(response);
             if(response.data[0]){
                 this.setState({
                     returnedArr: response.data
@@ -34,7 +36,21 @@ class RoutesHistory extends React.Component{
                 })
             }
         })
-        
+        const {endpoint} = this.state;
+        const socket = io(endpoint);
+        socket.on('RoutesUpdate',()=>{
+            axios.get(`/api/routes/${this.state.employeephone}`).then(response=>{
+                console.log(response);
+                if(response.data[0]){
+                    this.setState({
+                        returnedArr: response.data
+                    })
+                    this.setState({
+                        returned: true
+                    })
+                }
+            })
+        })
     }
 
     componentWillReceiveProps(nextProps){
@@ -70,9 +86,11 @@ class RoutesHistory extends React.Component{
                     <Paper key={i} style={style} zDepth={5}>
                     <div>
                         <h1>{curr.name}</h1>
+                        <p>{`Status: ${curr.status}`}</p>
+                        <p>{`Description: ${curr.description}`}</p>
                         <p>{`Destination Latitude: ${curr.destlat}`}</p>
                         <p>{`Destination Longitude: ${curr.destlon}`}</p>
-                        <p>{`Status: ${curr.status}`}</p>
+                        
                     </div>
                     </Paper>
                 )

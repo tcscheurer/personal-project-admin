@@ -116,11 +116,12 @@ class MessageWindow extends Component {
     }
     axios.post('/api/message/user',obj).then(response=>{
         console.log(response)
+        const {endpoint} = this.state;
+        const socket = io(endpoint);
+        socket.emit('MessagesChange');
     }).catch(err=>console.log(err))
-
-    const {endpoint} = this.state;
-    const socket = io(endpoint);
-    socket.emit('MessagesChange');
+    
+    //Moved socket emit inside
   }
 
  

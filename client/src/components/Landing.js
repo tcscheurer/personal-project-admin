@@ -19,7 +19,7 @@ class Landing extends Component{
                 <div id="landing-content-wrapper">
                     <h1 id="landingLogo">TRAX</h1>
                     <h1 id="land-desc">Manage the logistics of your equipment</h1>
-                    <a href='http://localhost:5000/auth'><button className="main-land-btn">Sign in/Sign Up</button></a>
+                    <a href='http://localhost:5000/auth'><button className="main-land-btn">SIGN IN/SIGN UP</button></a>
                 </div>
                 <div id="about-us">
                     <div id="about-us-content">

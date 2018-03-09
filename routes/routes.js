@@ -86,6 +86,7 @@ app.post('/api/routes',(req,res)=>{
         destlon,
         startinglat,
         startinglon,
+        description
     } = req.body;
     const data = [
         employeephone,
@@ -94,8 +95,10 @@ app.post('/api/routes',(req,res)=>{
         startinglon,
         destlat,
         destlon,
-        'incomplete'
+        'incomplete',
+        description
     ]
+    
     app.get('db').insertRoute(data).then(response=>{
         res.status(200).json({success: "Route has been added successsfully"})
     }).catch(err=>console.log(err))
@@ -152,7 +155,7 @@ app.get('/api/routes2/:manageid/:phone',(req,res)=>{
         manageid
     ]
     console.log(phone,manageid);
-    app.get('db').getRoutes(data).then(response=>{
+    app.get('db').getIncompleteRoutes(data).then(response=>{
         res.status(200).send(response);
     }).catch(err=>console.log(err))
 })

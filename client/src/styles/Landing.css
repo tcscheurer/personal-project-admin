@@ -17,6 +17,9 @@ Color Schemes:
     roboto - generic (for Material UI and basic stuff)
     
 */
+body{
+    background-color: rgb(242, 242, 242) !important;
+}
 
 a {
     text-decoration: none;
@@ -31,9 +34,9 @@ a {
 }
 
 #Landing-wrapper{
-    background-image: url("images/pexels-photo-176851.jpeg");
+    background-image: url("images/edittttt.png");
     margin-top: 0px;
-    height: 700px;
+    height: 1000px;
 }
 
 
@@ -61,14 +64,13 @@ a {
     height: 70px;
     width: 180px;
     border-radius: 20px;
-    color: #4DD0E1;
+    color: white;
     background-color: black;
     border: 1px solid black;
 }
 
 .main-land-btn:hover{
    cursor: pointer;
-   border: 1px solid #4DD0E1;
 }
 
 #land-hash-wrapper{
@@ -91,11 +93,6 @@ a {
     font-size: 200px;
     margin-bottom: 10px;
     color: black;
-    text-shadow:
-    -1px -1px 0 #4DD0E1,
-    1px -1px 0 #4DD0E1,
-    -1px 1px 0 #4DD0E1,
-    1px 1px 0 #4DD0E1;
 }
 
 #about-us{
@@ -156,7 +153,5 @@ a {
 }
 
 .land-get-started:hover{
-    border: 2px solid black;
-    font-size: 15px;
     cursor: pointer;
 }

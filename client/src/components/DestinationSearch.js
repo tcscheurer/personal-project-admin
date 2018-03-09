@@ -55,7 +55,7 @@ export const DestinationSearch = compose(
         }}
       />
     </StandaloneSearchBox>
-    <ol>
+    <ul>
       {props.places.map(({ place_id, formatted_address, geometry: { location } }) =>
         <li key={place_id}>
           {formatted_address}
@@ -63,6 +63,6 @@ export const DestinationSearch = compose(
           ({location.lat()}, {location.lng()})
         </li>
       )}
-    </ol>
+    </ul>
   </div>
 );

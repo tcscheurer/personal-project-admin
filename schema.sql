@@ -26,6 +26,7 @@ create table routes (
 id serial primary key,
 employeephone varchar(11) REFERENCES employees(phone),
 managerauthid varchar(40) REFERENCES users(authid),
+description varchar(255),
 startingLat varchar(40),
 startingLon varchar(40),
 destLat varchar(40),

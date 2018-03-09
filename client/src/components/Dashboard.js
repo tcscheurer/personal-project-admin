@@ -35,6 +35,7 @@ class Dashboard extends React.Component{
 
     
     render() {
+      console.log(this.props.user);
       const myEmployees = this.props.employees.map((curr, i)=>{
         return <MenuItem style={{color: 'black'}} key={i}><Link className ='myLinks' to={`/emplInterface/${curr.phone}/${curr.latitude}/${curr.longitude}`}>{curr.name}</Link></MenuItem>
       })
@@ -43,7 +44,8 @@ class Dashboard extends React.Component{
           <div >
             <DashNav handleToggle={this.handleToggle} />
             
-            {(this.props.employees[0]) ?
+            {(this.props.employees[0] && this.props.user) ?
+            <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', flexWrap: 'wrap'}}>
             <LandingMap style ={{
               marginTop: 100
             }}
@@ -52,6 +54,13 @@ class Dashboard extends React.Component{
             employees={this.props.employees}
             isMarkerShown={this.state.isMarkerShown}
             />
+            <div>
+            <h3>{`Welcome ${this.props.user.name}`}</h3>
+            <p>Start managing your employees!</p>
+            <h4>Group Code:</h4>
+            <p>{this.props.user.authid}</p>
+            </div>
+            </div>
             :
             false           
             }

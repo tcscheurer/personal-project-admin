@@ -1,4 +1,4 @@
-INSERT INTO routes (employeephone, managerauthid, startingLat, startingLon, destLat, destLon, status)
+INSERT INTO routes (employeephone, managerauthid, startingLat, startingLon, destLat, destLon, status, description)
 VALUES(
     $1,
     $2,
@@ -6,5 +6,6 @@ VALUES(
     $4,
     $5,
     $6,
-    $7
+    $7,
+    $8
 );
