@@ -41,6 +41,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+//Passport strategy
 passport.use(new Auth0Strategy({
     domain: AUTH_DOMAIN,
     clientSecret: AUTH_CLIENT_SECRET,
