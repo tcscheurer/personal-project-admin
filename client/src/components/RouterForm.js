@@ -4,6 +4,7 @@ import {cyan300} from 'material-ui/styles/colors';
 import FlatButton from 'material-ui/FlatButton';
 import axios from 'axios';
 import io from 'socket.io-client';
+import swal from 'sweetalert2';
 
 const styles = {
     errorStyle: {
@@ -63,9 +64,17 @@ class RouterForm extends React.Component{
              const {endpoint} = this.state;
              const socket = io(endpoint);
              socket.emit('RoutesUpdate');
-
+            this.handleAlert();
          }).catch(err=>console.log(err))
          
+     }
+
+     handleAlert = () => {
+        swal({
+            type: 'success',
+            title: "Success",
+            text: "You're employee has received the routing information."
+        })
      }
 
     render(){

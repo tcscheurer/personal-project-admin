@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 import axios from 'axios';
 
+
 class Donations extends Component{
 
     constructor(){
@@ -12,6 +13,7 @@ class Donations extends Component{
         axios.post('/api/stripe',token).then(response=>{
             console.log(response);
         })
+       
     }
 
     render(){
