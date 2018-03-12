@@ -1,5 +1,6 @@
 import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
+import Donations from './Donation';
 
 export default class InterfaceNav extends React.Component{
     constructor(props){
@@ -21,15 +22,17 @@ export default class InterfaceNav extends React.Component{
                 marginLeft: 40
             }}
             >TRAX</h1>
+            <div 
+            style={{width: 400,float: 'right', display: 'flex', justifyContent: 'space-around', alignItems: 'center', marginTop: 20}}>
             <RaisedButton
                 label="Manage My Employees"
                 onClick={this.props.handleToggle}
                 style={{
-                  margin: 20,
-                  marginRight: 40,
-                  float: 'right'
+                  
                 }}
                 />
+            <Donations />
+            </div>
             </nav>
         )
     }

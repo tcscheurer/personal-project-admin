@@ -10,7 +10,7 @@ import AppBar from 'material-ui/AppBar';
 import {getUser,getEmployees} from '../dux/reducer';
 import {AppBarDrop} from './AppBarDrop';
 import {LandingMap} from './LandingMap';
-import DashNav from './DashToolbar';
+import InterfaceNav from './InterfaceNav';
 
 class Dashboard extends React.Component{
     constructor(props){
@@ -42,7 +42,7 @@ class Dashboard extends React.Component{
      
         return (
           <div >
-            <DashNav handleToggle={this.handleToggle} />
+            <InterfaceNav handleToggle={this.handleToggle} />
             
             {(this.props.employees[0] && this.props.user) ?
             <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', flexWrap: 'wrap'}}>

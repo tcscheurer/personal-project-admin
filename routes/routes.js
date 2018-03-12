@@ -1,3 +1,6 @@
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const twilClient = require('twilio')(process.env.TWILIO_ACC_SID, process.env.TWILIO_ACC_TOKEN);
+const twilPhoneNum = process.env.TWILIO_PHONE_NUM;
 module.exports = (app) => {   
 
 // Fuctionality for User/Admin Role
@@ -100,6 +103,13 @@ app.post('/api/routes',(req,res)=>{
     ]
     
     app.get('db').insertRoute(data).then(response=>{
+        app.get('db').getEmployee([employeephone, req.user.authid]).then(employee=>{
+            twilClient.messages.create({
+                to: `+1${employee[0].phone}`,
+                from: twilPhoneNum,
+                body: `Hi ${employee[0].name}, this is a TRAX notification. You have a new route! Please login to view details`
+            }).then(message=>console.log(message.sid)).catch(err=>console.log(err))
+        })
         res.status(200).json({success: "Route has been added successsfully"})
     }).catch(err=>console.log(err))
 })
@@ -119,6 +129,16 @@ app.delete('/api/routes',(req,res)=>{
     app.get('db').deleteRoute(data).then(response=>{
         res.status(200).json({success: "Route successfully removed"})
     }).catch(err=>console.log(err))
+})
+
+app.post('/api/stripe', async (req,res) => {
+    const charge = await stripe.charges.create({
+        amount: 500,
+        currency: 'usd',
+        description: '$5 donation',
+        source: req.body.id
+    });
+    res.status(200).json({ success: "Donation successfully made"})
 })
 
 //----------------------------------------------------------------------------------

@@ -91,9 +91,8 @@ class RouterForm extends React.Component{
             /><br/>
             <TextField
             style={{zIndex: this.props.z}}
-            floatingLabelText="Description"
-            floatingLabelStyle={styles.floatingLabelStyle}
-            floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+            hintText="Description"
+            hintStyle={styles.errorStyle}
             errorText="Breif information for your employee"
             errorStyle={styles.errorStyle}
             multiLine={true}
