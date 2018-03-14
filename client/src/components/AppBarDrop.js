@@ -13,8 +13,8 @@ function myAlerter (){
     text: 'You are about to sign out of the application, would you like to continue?',
     showCloseButton: false,
     showCancelButton: true,
-    confirmButtonText: '<a style={{color: {`white`}}} href="/api/logout"><h3>Yes, sign me out</h3></a>',
-    cancelButtonText: '<h3>No, keep me logged in'
+    confirmButtonText: '<a href="/api/logout"><h5>Yes, sign me out</h5></a>',
+    cancelButtonText: '<h5>No, keep me logged in</h5>'
   })
 }
 

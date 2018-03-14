@@ -6,11 +6,15 @@ import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import MultiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import AppBar from 'material-ui/AppBar';
+import swal from 'sweetalert2';
+import AssignmentIcon from 'material-ui/svg-icons/action/assignment';
 
 import {getUser,getEmployees} from '../dux/reducer';
 import {AppBarDrop} from './AppBarDrop';
 import {LandingMap} from './LandingMap';
 import InterfaceNav from './InterfaceNav';
+import DashPie from './DashPie';
+import DashTable from './DashTable';
 
 class Dashboard extends React.Component{
     constructor(props){
@@ -33,6 +37,15 @@ class Dashboard extends React.Component{
       this.setState({open: false})
     }
 
+    handleAlert(){
+      swal({
+        type: 'info',
+        title: `Welcome, ${this.props.user.name}`,
+        text: `Group Code: ${this.props.user.authid}`,
+        footer: 'Manage your employees!'
+      })
+    }
+
     
     render() {
       console.log(this.props.user);
@@ -43,9 +56,14 @@ class Dashboard extends React.Component{
         return (
           <div >
             <InterfaceNav handleToggle={this.handleToggle} />
-            
+            {(this.props.user) ? 
+            <h3>{`Hi ${this.props.user.name}, welcome to your dashboard.`}</h3>
+              : 
+            false
+            }
+
             {(this.props.employees[0] && this.props.user) ?
-            <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', flexWrap: 'wrap'}}>
+            <div style={{width: '100%', marginBottom: 20, display: 'flex', justifyContent: 'space-around', alignItems: 'center', flexWrap: 'wrap'}}>
             <LandingMap style ={{
               marginTop: 100
             }}
@@ -55,18 +73,22 @@ class Dashboard extends React.Component{
             isMarkerShown={this.state.isMarkerShown}
             />
             <div>
-            <h3>{`Welcome ${this.props.user.name}`}</h3>
-            <p>Start managing your employees!</p>
-            <h4>Group Code:</h4>
-            <p>{this.props.user.authid}</p>
+            <h3> Routes completed by Employee </h3>
+            <DashPie />
+            </div>            
             </div>
-            </div>
+            
             :
             false           
             }
-           
-              
-            
+           <div>
+            <DashTable />
+            <RaisedButton  
+            icon={<AssignmentIcon />}
+            style={{position: 'fixed', right: 10, bottom: 10,height: 40}}
+            onClick={()=>this.handleAlert()}
+            />
+            </div>
        
             <Drawer
               docked={false}

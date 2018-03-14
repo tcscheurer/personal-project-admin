@@ -7,6 +7,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import MultiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import _ from 'lodash';
 import AppBar from 'material-ui/AppBar';
+import SearchIcon from 'material-ui/svg-icons/action/search'
 
 
 //import io from 'socket.io-client';
@@ -80,7 +81,7 @@ class EmplActionInterface extends React.Component{
                           
             { (selectedEmployee[0]) ?
             <div style={{marginTop: 40,
-                        marginBottom: 50,
+                        marginBottom: 10,
                         display: 'flex',
                         flexWrap: 'wrap',
                         justifyContent: 'space-around',
@@ -96,14 +97,16 @@ class EmplActionInterface extends React.Component{
                 <MessageWindow  handleZ={this.handleZ} userNameToDisplay={selectedEmployee[0].name} phone={selectedEmployee[0].phone} />
                </div>
                <div>
+              <div style={{ width: 290,display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
+               <SearchIcon color='black'/>
                <DestinationSearch />
-               
+               </div>
                <RouterForm z={this.state.z}
                employeePhone={selectedEmployee[0].phone}
-              startingLat={selectedEmployee[0].latitude}
-              startingLon={selectedEmployee[0].longitude}
-              name={selectedEmployee[0].name}
-            />
+                startingLat={selectedEmployee[0].latitude}
+                startingLon={selectedEmployee[0].longitude}
+                name={selectedEmployee[0].name}
+              />
             </div>
             </div>
                 :
@@ -128,10 +131,11 @@ class EmplActionInterface extends React.Component{
           
           
           {(selectedEmployee[0]) ? 
-          <div>
-            <h1>{`${selectedEmployee[0].name}'s Routes`}</h1>
+          <div style={{display: 'flex',flexDirection: 'column',justifyContent:'center',alignItems:'center'}}>
+            <h3>{`${selectedEmployee[0].name}'s Routes`}</h3>
             <RoutesHistory 
             employeephone={selectedEmployee[0].phone}
+            z={this.state.z}
             />
             </div>
             :

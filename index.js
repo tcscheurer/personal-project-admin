@@ -50,6 +50,7 @@ passport.use(new Auth0Strategy({
     callbackURL: '/auth'
 },
 (accessToken,refreshToken,extraParams,profile,done)=>{
+    console.log("Acdcess token:", accessToken);
     
     app.get('db').getUserByAuthId(profile.id).then(response=>{
         if(!response[0]){

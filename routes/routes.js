@@ -71,6 +71,18 @@ app.post('/api/message/employee',(req,res)=>{
     })
 })
 
+app.get('/api/getAllRoutes',(req,res)=>{
+    app.get('db').getAllRoutes(req.user.authid).then(response=>{
+        res.status(200).send(response);
+    }).catch(err=>console.log(err))
+})
+
+app.get('/api/dashRoutes',(req,res)=>{
+    app.get('db').getRoutesForDash(req.user.authid).then(response=>{
+        res.status(200).send(response)
+    }).catch(err=>console.log(err))
+})
+
 app.get('/api/routes/:employeephone',(req,res)=>{
     const {employeephone} = req.params;
     app.get('db').getRoutes([employeephone,req.user.authid]).then(response=>{

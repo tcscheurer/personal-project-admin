@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 import axios from 'axios';
-
+import swal from 'sweetalert2';
+import RaisedButton from 'material-ui/RaisedButton';
+import CardIcon from 'material-ui/svg-icons/action/credit-card';
 
 class Donations extends Component{
 
@@ -13,7 +15,14 @@ class Donations extends Component{
         axios.post('/api/stripe',token).then(response=>{
             console.log(response);
         })
-       
+       swal({
+           title: 'Thank you!',
+           text: "Your donations mean very much to our success.",
+           timer: 3000,
+            onOpen: () => {
+                swal.showLoading()
+            }
+       })
     }
 
     render(){
@@ -26,9 +35,11 @@ class Donations extends Component{
             token = {token => this.handleToken(token)}
             stripeKey='pk_test_y1r2W9byRCQt5sB6Gj10VKt0'
          >
-            <button className="donations-btn">
-                DONATE
-            </button>
+            <RaisedButton  
+                style={{width: 60}}
+                icon={<CardIcon />}
+            />
+            
          </StripeCheckout>
         )
     }

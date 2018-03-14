@@ -3,6 +3,8 @@ import axios from 'axios'
 import io from 'socket.io-client';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
+import RaisedButton from 'material-ui/RaisedButton';
+
 
 const style = {
     height: 'auto',
@@ -13,24 +15,25 @@ const style = {
     display: 'inline-block',
   };
 
-class RoutesHistory extends React.Component{
+class DashTable extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            employeephone: props.employeephone,
             returned: false,
             returnedArr: [],
+            arrayCopy: [],
             endpoint: 'http://localhost:5000'
         }
     }
 
 
     componentDidMount(){
-        axios.get(`/api/routes/${this.state.employeephone}`).then(response=>{
+        axios.get(`/api/dashRoutes`).then(response=>{
             console.log(response);
             if(response.data[0]){
                 this.setState({
-                    returnedArr: response.data
+                    returnedArr: response.data,
+                    arrayCopy: response.data
                 })
                 this.setState({
                     returned: true
@@ -40,11 +43,12 @@ class RoutesHistory extends React.Component{
         const {endpoint} = this.state;
         const socket = io(endpoint);
         socket.on('RoutesUpdate',()=>{
-            axios.get(`/api/routes/${this.state.employeephone}`).then(response=>{
+            axios.get(`/api/dashRoutes`).then(response=>{
                 console.log(response);
                 if(response.data[0]){
                     this.setState({
-                        returnedArr: response.data
+                        returnedArr: response.data,
+                        arrayCopy: response.data
                     })
                     this.setState({
                         returned: true
@@ -54,49 +58,67 @@ class RoutesHistory extends React.Component{
         })
     }
 
-  
     componentWillReceiveProps(nextProps){
         if(this.props != nextProps){
             this.setState({
-                employeephone: nextProps.employeephone,
-                
+                returned: false,
+                returnedArr: []
             })
         }
-        axios.get(`/api/routes/${this.state.employeephone}`).then(response=>{
+        axios.get(`/api/dashRoutes`).then(response=>{
             
             if(response.data[0]){
                 this.setState({
-                    returned: true,
-                    returnedArr: response.data
+                    returnedArr: response.data,
+                    arrayCopy: response.data
                 })
-                
-            } else{
                 this.setState({
-                    returnedArr: [],
-                    returned: false
+                    returned: true
                 })
             }
         })
     }
 
- 
+    filterComplete(){
+        let myArr = this.state.arrayCopy.filter((curr)=>{
+            return curr.status == 'complete'
+        })
+       this.setState({
+           returnedArr: myArr
+       })
+    }
+
+    filterIncomplete(){
+        let myArr = this.state.arrayCopy.filter((curr)=>{
+            return curr.status == 'incomplete'
+        })
+       this.setState({
+           returnedArr: myArr
+       })
+    }
+
+    setOriginal(){
+        this.setState({
+            returnedArr: this.state.arrayCopy
+        })
+    }
 
 
     render(){
         
         return(
-            <div style={{zIndex: this.props.z, width: '80%', display: 'flex', justifyContent:'center'}}>
+            <div style={{marginRight: 0, width: '100%', flexWrap: 'wrap', display: 'flex', justifyContent:'space-around', alignItems: 'center'}}>
             {
                 (this.state.returned) ?
                 <ReactTable
-                style={{width: '100%'}}
+                style={{width: '80%'}}
                 data={this.state.returnedArr}
                 columns={[
-                    { Header: 'Manager',
+                    { Header: 'Employee',
                         columns: [
                     {
-                        Header: 'Group',
-                        accessor: 'managerauthid'
+                        Header: 'Name',
+                        accessor: 'name'
                     }]
                     },
                     { 
@@ -128,39 +150,25 @@ class RoutesHistory extends React.Component{
                 defaultPageSize={5}
                 />
                 :
-                <h3>No routes to display for this employee</h3>
+                <h3>Loading...</h3>
             }
+            <div style={{height: 170, display: 'flex', flexDirection: 'column', justifyContent: 'space-around'}}>
+            <RaisedButton
+            label="Filter Complete"
+            onClick={()=>this.filterComplete()}
+            />
+            <RaisedButton
+            label="Filter Incomplete"
+            onClick={()=>this.filterIncomplete()}
+            />
+            <RaisedButton
+            label="View Original"
+            onClick={()=>this.setOriginal()}
+            />
+            </div>
            </div>
         )
     }
 }
 
-export default RoutesHistory;
-
-/*
-<ReactTable
-data={this.state.returnedArr}
-columns={[
-    {
-        Header: 'Group',
-        accessor: 'managerauthid'
-    },
-    {
-        Header: 'Destination Latitude',
-        accessor: 'destlat'
-    },
-    {
-        Header: 'Destination Longitude',
-        accessor: 'destlon'
-    },
-    {
-        Header: 'Details',
-        accessor: 'description'
-    },
-    {
-        Header: 'Completion Status',
-        accessor: 'status'
-    }
-]}
-/>
-*/
+export default DashTable;
