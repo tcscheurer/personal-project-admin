@@ -1,0 +1,40 @@
+.my-router-form-container{
+    margin-top: 30px;
+    background-color: rgba(252, 253, 255, 0.8);
+    height: 500px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: space-around;
+    border-radius: 20px;
+}
+
+.action-interface-map-wraper{
+    height: 500px;
+    width: 100%;
+}
+
+.map-and-message-wrapper{
+    width: 50%;
+}
+
+.action-interface-routes-history-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 60px;
+}
+
+@media only screen and (max-width: 800px){
+    .map-and-message-wrapper{
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 400px){
+    .action-interface-routes-history-wrapper{
+        margin-bottom: 100px;
+    }
+}

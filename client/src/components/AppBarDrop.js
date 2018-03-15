@@ -28,6 +28,6 @@ export const AppBarDrop = (props) => (
       anchorOrigin={{horizontal: 'right', vertical: 'top'}}
     >
     <Link to='/dashboard'><MenuItem primaryText="Dashboard"></MenuItem></Link>
-    <MenuItem primaryText="Sign out" onClick={()=>myAlerter()}></MenuItem>
+    <MenuItem primaryText="Sign out" onClick={()=> myAlerter()}></MenuItem>
     </IconMenu>
   );

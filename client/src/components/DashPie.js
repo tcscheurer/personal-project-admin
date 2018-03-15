@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {PieChart} from 'react-d3-components';
 import axios from 'axios';
-import _ from 'lodash'
+import _ from 'lodash';
+import '../styles/Dashboard.css';
 
 class DashPie extends Component{
 
@@ -35,12 +36,12 @@ class DashPie extends Component{
 
         
         return(
-            <div>
+            <div className='pie-chart-container'>
             {(this.state.data[0]) ?
             <PieChart
                 data={chartData}
-                width={700}
-                height={400}
+                width={780}
+                height={500}
                 sort={null}
             />
             :

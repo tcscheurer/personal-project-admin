@@ -6,8 +6,8 @@ export const LandingMap = compose(
   withProps({
     googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyAxm62zSoAzobkGBoVyOjKFgMAJL5z6iXM&v=3.exp&libraries=geometry,drawing,places",
     loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `500px`, width: '800px' }} />,
-    mapElement: <div style={{ height: `100%`, width: '100%', marginLeft: '30px',border: '1px solid #b0b3b7' }} />,
+    containerElement: <div style={{ height: `500px`, width: '100%',marginLeft: '30px', marginRight: '30px' }} />,
+    mapElement: <div style={{ height: `100%`, width: '100%', border: '1px solid #b0b3b7' }} />,
   }),
   withScriptjs,
   withGoogleMap

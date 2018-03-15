@@ -8,7 +8,7 @@ import MultiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import _ from 'lodash';
 import AppBar from 'material-ui/AppBar';
 import SearchIcon from 'material-ui/svg-icons/action/search'
-
+import '../styles/EmplActionInterface.css';
 
 //import io from 'socket.io-client';
 //import {SocketProvider} from 'socket.io-react';
@@ -81,13 +81,15 @@ class EmplActionInterface extends React.Component{
                           
             { (selectedEmployee[0]) ?
             <div style={{marginTop: 40,
+                        width: '100%',
                         marginBottom: 10,
                         display: 'flex',
                         flexWrap: 'wrap',
                         justifyContent: 'space-around',
+                        alignItems: 'space-between',
                         alignItems: 'center'}} 
             >
-              <div>
+              <div className='map-and-message-wrapper' >
               <MyMap
                     isMarkerShown={this.state.isMarkerShown}
                     onMarkerClick={this.handleMarkerClick}
@@ -96,12 +98,13 @@ class EmplActionInterface extends React.Component{
                 />
                 <MessageWindow  handleZ={this.handleZ} userNameToDisplay={selectedEmployee[0].name} phone={selectedEmployee[0].phone} />
                </div>
-               <div>
-              <div style={{ width: 290,display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
+               <div className='my-router-form-container'>
+              <div style={{ width: '100%',display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
                <SearchIcon color='black'/>
                <DestinationSearch />
                </div>
-               <RouterForm z={this.state.z}
+               <RouterForm 
+               z={this.state.z}
                employeePhone={selectedEmployee[0].phone}
                 startingLat={selectedEmployee[0].latitude}
                 startingLon={selectedEmployee[0].longitude}
@@ -131,7 +134,7 @@ class EmplActionInterface extends React.Component{
           
           
           {(selectedEmployee[0]) ? 
-          <div style={{display: 'flex',flexDirection: 'column',justifyContent:'center',alignItems:'center'}}>
+          <div className='action-interface-routes-history-wrapper'>
             <h3>{`${selectedEmployee[0].name}'s Routes`}</h3>
             <RoutesHistory 
             employeephone={selectedEmployee[0].phone}

@@ -73,7 +73,7 @@ class Dashboard extends React.Component{
             employees={this.props.employees}
             isMarkerShown={this.state.isMarkerShown}
             />
-            <div>
+            <div className='dashboard-routes-completed-info' style={{width: '100%', height: 500, marginBottom: 30}}>
             <h3> Routes completed by Employee </h3>
             <DashPie />
             </div>            
