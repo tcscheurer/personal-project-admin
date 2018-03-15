@@ -8,6 +8,7 @@ import MultiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import AppBar from 'material-ui/AppBar';
 import swal from 'sweetalert2';
 import AssignmentIcon from 'material-ui/svg-icons/action/assignment';
+import '../styles/Dashboard.css';
 
 import {getUser,getEmployees} from '../dux/reducer';
 import {AppBarDrop} from './AppBarDrop';

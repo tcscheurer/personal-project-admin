@@ -1,25 +1,8 @@
-/*
-Color Schemes:
-     over all blue: cyan300 - #4dd0e1
-     back dark grey: grey 900 - #212121
-    lighter grey: grey 500 - #9e9e9e
-    indigo(blue purple) for highlighting and whatnot: indigo500 - #3F51B5
-    
-    
-    FONTS:
-    font-family: 'Neuton', serif;
-    font-family: 'Roboto', sans-serif;
-    font-family: 'Noto Sans', sans-serif;
 
-    
-    montserrat - straight (logo)
-    neuton - slightly slanted for desctiptions and stuff
-    roboto - generic (for Material UI and basic stuff)
-    
-*/
 body{
     background-color: rgb(242, 242, 242) !important;
 }
+
 
 a {
     text-decoration: none;
@@ -36,6 +19,7 @@ a {
 
 #Landing-wrapper{
     background-image: url("images/edittttt.png");
+    background-size: 100% 100%;
     margin-top: 0px;
     height: 1000px;
 }
@@ -51,12 +35,15 @@ a {
     background-color: black;
 }
 
+
+
+
 #land-nav-logo{
     color: white;
 }
 
 #land-desc{
-    font-family: 'Neuton', serif;
+    font-family: 'Roboto', sans-serif;
     margin-bottom: 60px;
 }
 
@@ -78,6 +65,10 @@ a {
     width: 400px;
     display: flex;
     justify-content: space-between;
+}
+
+.expand-more-wrapper{
+    display: none;
 }
 
 #land-nav-item{
@@ -133,6 +124,8 @@ a {
     display: flex;
     flex-direction: column;    
     align-items: center;
+    margin-right: 40px;
+    margin-left: 40px;
 }
 
 #formated-review-pic{
@@ -155,4 +148,88 @@ a {
 
 .land-get-started:hover{
     cursor: pointer;
+}
+
+@media only screen and (max-width: 895px){
+    #land-nav-wrapper{
+        justify-content: space-between;
+    }
+    #land-hash-wrapper{
+        width: 350px; 
+        margin-right: 20px;      
+    }
+    #land-nav-logo{
+        margin-left: 20px;
+    }
+
+}
+
+@media only screen and (max-width: 590px){
+    #land-desc{
+        font-size: 30px;
+    }
+}
+
+@media only screen and (max-width: 550px){
+    #land-hash-wrapper{
+        display: none;
+    }
+    /*
+    expand icon
+    */
+      .expand-more-wrapper{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-right: 20px;
+          width: 36px;          
+      }  
+      .expand-more-wrapper:hover{
+        cursor: pointer;        
+    }  
+          
+}
+
+@media only screen and (max-width: 540px){
+    #land-desc{
+        font-size: 28px;
+    }
+}
+
+@media only screen and (max-width: 513px){
+    #landing-content-wrapper{
+        margin-top: 200px;
+    }
+    #landingLogo{
+        font-family: 'Roboto', sans-serif;
+        font-size: 150px;
+        margin-bottom: 10px;
+        color: black;
+    }
+    #about-us{        
+        margin-top:550px;
+        margin-bottom: 100px;               
+    }
+    #customer-reviews{
+        margin-top: 200px;
+        margin-bottom: 15px;
+        margin-left: 100px;
+        margin-right: 100px;
+    }
+}
+
+@media only screen and (max-width: 500px){
+    #landingLogo{
+        font-size: 130px;
+    }
+    #landing-content-wrapper{
+        margin-top: 180px;
+    }
+    #about-us{        
+        margin-top:420px;
+        margin-bottom: 100px;    
+        font-size: 14px; 
+        margin-left: 30px;
+        margin-right: 30px;          
+    }
 }

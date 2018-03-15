@@ -4,11 +4,12 @@ import axios from 'axios';
 import swal from 'sweetalert2';
 import RaisedButton from 'material-ui/RaisedButton';
 import CardIcon from 'material-ui/svg-icons/action/credit-card';
+import FlatButton from 'material-ui/FlatButton';
 
 class Donations extends Component{
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
     }
 
     handleToken(token){
@@ -25,6 +26,14 @@ class Donations extends Component{
        })
     }
 
+    onClosed(){
+        if(this.props.handleClose){
+        this.props.handleClose();
+        } else {
+            return;
+        }
+    }
+
     render(){
         
         return (
@@ -34,11 +43,19 @@ class Donations extends Component{
             amount = {500}
             token = {token => this.handleToken(token)}
             stripeKey='pk_test_y1r2W9byRCQt5sB6Gj10VKt0'
+            closed={()=>this.onClosed()}
          >
-            <RaisedButton  
+            {(this.props.flat === true) ? 
+            <FlatButton
                 style={{width: 60}}
                 icon={<CardIcon />}
             />
+            :
+            <RaisedButton                  
+                style={{width: 60}}
+                icon={<CardIcon />}
+            />
+            }
             
          </StripeCheckout>
         )

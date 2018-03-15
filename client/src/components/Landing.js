@@ -4,8 +4,37 @@ import '../styles/Landing.css'
 import pic1 from '../styles/images/pexels-photo-428339.jpeg';
 import pic2 from '../styles/images/pexels-photo-428341.jpeg';
 import pic3 from '../styles/images/pexels-photo-450271.jpeg';
+import ExpandMore from 'material-ui/svg-icons/navigation/expand-more';
+import Popover from 'material-ui/Popover';
+import Menu from 'material-ui/Menu';
+import MenuItem from 'material-ui/MenuItem';
+import RaisedButton from 'material-ui/RaisedButton';
 
 class Landing extends Component{
+
+    constructor(){
+        super();
+        this.state = {
+            open: false
+        }
+    }
+
+    handleClick = (event) => {
+        // This prevents ghost click.
+        event.preventDefault();
+    
+        this.setState({
+          open: true,
+          anchorEl: event.currentTarget,
+        });
+      };
+    
+      handleRequestClose = () => {
+        this.setState({
+          open: false,
+        });
+      };
+
     render(){
         return(
             <div id="Landing-wrapper">
@@ -13,19 +42,43 @@ class Landing extends Component{
                     <h2 id="land-nav-logo">TRAX</h2>
                     <div id="land-hash-wrapper">
                     <HashLink smooth to="#about-us"><h3 id="land-nav-item">About Us</h3></HashLink>
-                    <HashLink smooth to="#customer-reviews"><h3 id="land-nav-item">What Our customers Think</h3></HashLink>
+                    <HashLink smooth to="#customer-reviews"><h3 id="land-nav-item">What Our Customers Think</h3></HashLink>
+                    </div>
+                    <div className='expand-more-wrapper'>
+                        <RaisedButton
+                            style={{minWidth: 60}}
+                            onClick={this.handleClick}
+                            icon={<ExpandMore />}
+                            />
+                        <Popover
+                            open={this.state.open}
+                            anchorEl={this.state.anchorEl}
+                            anchorOrigin={{horizontal: 'middle', vertical: 'bottom'}}
+                            targetOrigin={{horizontal: 'right', vertical: 'top'}}
+                            onRequestClose={this.handleRequestClose}
+                            >
+                            <Menu>
+                                <MenuItem >
+                                    <HashLink smooth to="#about-us"><h3 style={{color: 'black'}}>About Us</h3></HashLink>
+                                </MenuItem>
+                                <MenuItem>
+                                    <HashLink smooth to="#customer-reviews"><h3 style={{color: 'black'}}>What Our Customers Think</h3></HashLink>
+                                </MenuItem>
+                                
+                            </Menu>
+                        </Popover>
                     </div>
                 </nav>
                 <div id="landing-content-wrapper">
                     <h1 id="landingLogo">TRAX</h1>
-                    <h1 id="land-desc">Manage the logistics of your equipment</h1>
+                    <h1 id="land-desc">Simple, creative logistics management.</h1>
                     <a href='http://localhost:5000/auth'><button className="main-land-btn">SIGN IN/SIGN UP</button></a>
                 </div>
                 <div id="about-us">
                     <div id="about-us-content">
                         <h1>About</h1>
-                        <h3>TRAX is an online application tool to manage the tracking of your equipment and the communtication between you and those who operate your equipment</h3>
-                        <h3>Lorem ipsum sdkfjasldkhfasdhgsk sdghosdbnfsdlksndlkgns osjbdfjsbdjbsdngkls osadbskjbdklasd sdjb sdjbfsjdbgs sdjfbsjdbf sdkjbfsjdkbgsjlbdbgls sdjdbkjsdbgs dskjdbfskjdbggsd sdkjbsdhgs sdjbgsjbd</h3>
+                        <h3>TRAX is an web application tool for employers to manage logistics and communication with your employee</h3>
+                        <p>At TRAX we have a simple goal in mind, provide simple, creative logistic managemnet solutions to Employers.</p>
                     </div>
                 </div>
                 <div id="customer-reviews">

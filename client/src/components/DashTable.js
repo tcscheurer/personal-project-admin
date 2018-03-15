@@ -4,7 +4,7 @@ import io from 'socket.io-client';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import RaisedButton from 'material-ui/RaisedButton';
-
+import Loader from 'react-loader'
 
 const style = {
     height: 'auto',
@@ -58,13 +58,8 @@ class DashTable extends React.Component{
         })
     }
 
+
     componentWillReceiveProps(nextProps){
-        if(this.props != nextProps){
-            this.setState({
-                returned: false,
-                returnedArr: []
-            })
-        }
         axios.get(`/api/dashRoutes`).then(response=>{
             
             if(response.data[0]){
@@ -74,6 +69,11 @@ class DashTable extends React.Component{
                 })
                 this.setState({
                     returned: true
+                })
+            }else{
+                this.setState({
+                    returned: false,
+                    returnedArr: []
                 })
             }
         })
@@ -150,7 +150,7 @@ class DashTable extends React.Component{
                 defaultPageSize={5}
                 />
                 :
-                <h3>Loading...</h3>
+                <Loader loaded={this.state.returned} />
             }
             <div style={{height: 170, display: 'flex', flexDirection: 'column', justifyContent: 'space-around'}}>
             <RaisedButton
