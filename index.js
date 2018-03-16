@@ -12,6 +12,10 @@ const path = require('path');
 const port = 5000;
 
 const app = express();
+
+//production
+app.use(express.static(`${__dirname}/client/build`));
+
 app.use(json());
 const{
     CONNECTION_STRING,
@@ -19,14 +23,10 @@ const{
     AUTH_CLIENT_ID,
     AUTH_CLIENT_SECRET,
     SESSION_SECRET,
+    PASSPORT_SUCCESS_REDIRECT,
+    PASSPORT_FAILURE_REDIRECT
 } = process.env;
-/*
-TWILIO_ACC_SID,
-TWILIO_ACC_TOKEN,
-TWILIO_PHONE_NUM
-*/
 
-//const client = require('twilio')(TWILIO_ACC_SID,TWILIO_ACC_TOKEN);
 massive(CONNECTION_STRING).then(db=>app.set('db',db)).catch(err=>console.log(err));
 
 app.use(session({
@@ -67,12 +67,19 @@ passport.deserializeUser((user,done)=>done(null,user));
 
 app.get('/auth',
 passport.authenticate('auth0', {
-    successRedirect: 'http://localhost:3000/dashboard',
-    failureRedirect: 'http://localhost:3000/'
+    successRedirect: PASSPORT_SUCCESS_REDIRECT,
+    failureRedirect: PASSPORT_FAILURE_REDIRECT
 })
 );
 
 require('./routes/routes')(app);
+
+
+//production
+app.get('*',(req,res)=>{
+    res.sendFile(path.join(__dirname,'/client/build/index.html'));
+})
+
 var server = app.listen(port, () => {
     console.log(`Listening on Port: ${port}`);
 });
