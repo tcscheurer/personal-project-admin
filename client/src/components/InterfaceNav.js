@@ -7,6 +7,8 @@ import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import FlatButton from 'material-ui/FlatButton';
 import '../styles/Nav.css';
+import {Link} from 'react-router-dom';
+
 
 export default class InterfaceNav extends React.Component{
     constructor(props){
@@ -37,12 +39,14 @@ export default class InterfaceNav extends React.Component{
             <nav className='my-interface-nav'
            
             >
+            <Link to='/dashboard'>
             <h1 style={{
                 color: 'white',
                 float: 'left',
                 marginLeft: 40
             }}
             >TRAX</h1>
+            </Link>
             <div className='interface-nav-action-container'>
             <RaisedButton
                 label="Manage My Employees"
